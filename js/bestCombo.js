@@ -42,7 +42,7 @@ function bestCombo(cards) {
 		}
 	}
 	if (isAThree && isATwo) {
-		return hand
+		return ['Full',hand]
 	}
 
 	// Check for a flush
@@ -61,35 +61,41 @@ function bestCombo(cards) {
 				}
 			}
 		)
-		return hand
+		return ['Flush',hand]
 	}
 
 	// Check for a pair
 	if (isAPair(cards)) {
 		let hand = []
 		let values = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
-		values.forEach(
-			value => {
-				let nbOcc = nbOccurences(cardsValue, value)
-				if (nbOcc == 2) {
-					let indexes = allIndexOf(cardsValue, value)
-					for (let i = 0; i < 2; i++) {
-						hand.push(cards[indexes[i]])
-					}
-					let i = 0
-					let j = 0
-					while (j < 3) {
-						if (!indexes.includes(i)) {
-							hand.push(cards[i])
-							j++
-						}
-						i++
-					}
-					return
+
+
+		for (let i = 0; i < values.length; i++) {
+
+			var value = values[i];
+
+			let nbOcc = nbOccurences(cardsValue, value)
+			if (nbOcc == 2) {
+				let indexes = allIndexOf(cardsValue, value)
+				for (let i = 0; i < 2; i++) {
+					hand.push(cards[indexes[i]])
 				}
-			}
-		)
-		return hand
+				let i = 0
+				let j = 0
+				while (j < 3) {
+					if (!indexes.includes(i)) {
+						hand.push(cards[i])
+						j++
+					}
+					i++
+				}
+
+				break;
+			}			
+
+		}
+
+		return ['Pair',hand]
 	}
 
 	// Check for a hauteur
@@ -97,6 +103,6 @@ function bestCombo(cards) {
 	for (let i = 0; i < 5; i++) {
 		hand.push(cards[i])
 	}
-	return hand
+	return ['Hauteur',hand]
 
 }

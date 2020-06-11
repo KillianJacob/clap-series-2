@@ -10,6 +10,8 @@
 <script src="js/orderCards.js"></script>
 <script src="js/isAFlush.js"></script>
 <script src="js/isAPair.js"></script>
+<script src="js/Utils.js"></script>
+<script src="js/compareCombos.js"></script>
 </head>
 
 <body>
@@ -110,149 +112,47 @@ var hands = dealer();
 console.log(hands[0]);
 console.log(hands[1]);
 console.log(hands[2]);
+
 var hand_hero = hands[1];
 var hand_vilain = hands[2];
 var hand_bank = hands[0];
 
-const cards = {
-  ace: "A",
-  king: "K",
-  queen: "Q",
-  jack: "J",
-  10: "10",
-  9: "9",
-  8: "8",
-  7: "7",
-  6: "6",
-  5: "5",
-  4: "4",
-  3: "3",
-  2: "2"
-}
+setImagesOfPlayer(hand_hero,'hero');
 
-const TYPES = {
-  diamonds: "d",
-  hearts: "h",
-  spades: "s",
-  clubs: "c"
-}
+setImagesOfPlayer(hand_vilain,'vilain');
 
-for (let i = 0; i < hand_hero.length; i++) {
+setImagesOfPlayer(hand_bank,'bank');
 
-    var c = hand_hero[i];
+var comboHero = ([hand_hero,hand_bank]).flat();
+var comboVilain = ([hand_vilain,hand_bank]).flat();
 
-    var value = null;
-    var type = null;
+var resHero = null;
+var resVilain = null;
 
-    if(c.length == 3){
-		
-        value = c.substring(0, 2);
-        type = c.charAt(2);
+var combo = bestCombo(comboHero);
 
-    }
-    else{
+comboHero = combo[1];
+resHero = combo[0];
 
-        value = c.charAt(0);
-        type = c.charAt(1);
-        
-    }
+combo = bestCombo(comboVilain);
+
+comboVilain = combo[1];
+resVilain = combo[0];
+
+var WinHand = compareCombos(comboHero,comboVilain);
+
+console.log("Hero : " + resHero);
+console.log("Vilain : " + resVilain);
+
+if(arraysEqual(WinHand,comboHero)){
     
-    imgURL = keyOf(value) + '_of_' + keyOfType(type) + '.png';
-
-    document.getElementById('hero_card_' + i).setAttribute("src", "assets/" + imgURL);
+    console.log("Winner : hero");
 
 }
+else if(arraysEqual(WinHand,comboVilain)){
 
-for (let i = 0; i < hand_vilain.length; i++) {
+    console.log("Winner : vilain");
 
-var c = hand_vilain[i];
-
-var value = null;
-var type = null;
-
-if(c.length == 3){
-    
-    value = c.substring(0, 2);
-    type = c.charAt(2);
-
-}
-else{
-
-    value = c.charAt(0);
-    type = c.charAt(1);
-    
-}
-
-imgURL = keyOf(value) + '_of_' + keyOfType(type) + '.png';
-
-document.getElementById('vilain_card_' + i).setAttribute("src", "assets/" + imgURL);
-
-}
-
-for (let i = 0; i < hand_bank.length; i++) {
-
-var c = hand_bank[i];
-
-var value = null;
-var type = null;
-
-if(c.length == 3){
-    
-    value = c.substring(0, 2);
-    type = c.charAt(2);
-
-}
-else{
-
-    value = c.charAt(0);
-    type = c.charAt(1);
-    
-}
-
-imgURL = keyOf(value) + '_of_' + keyOfType(type) + '.png';
-
-document.getElementById('bank_card_' + i).setAttribute("src", "assets/" + imgURL);
-
-
-
-
-}
-
-
-function keyOf(value){
-	
-	var res = null;
-	
-	for (var key in cards) {
-	
-		if(cards[key] == value){
-			
-			res = key;
-			
-		}
-	
-	}
-	
-	return res;
-	
-}
-
-function keyOfType(type){
-	
-	var res = null;
-	
-	for (var key in TYPES) {
-	
-		if(TYPES[key] == type){
-			
-			res = key;
-			
-		}
-	
-	}
-	
-	return res;
-	
 }
 
 </script>
