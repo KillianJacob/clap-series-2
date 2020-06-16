@@ -304,7 +304,7 @@ if(arraysEqual(WinHand,comboHero)){
     var vilain = $('#vilain');
 
     vilain.removeClass("active");
-    hero.toggleClass('active');
+    hero.addClass('active');
 
 
 }
@@ -316,7 +316,7 @@ else if(arraysEqual(WinHand,comboVilain)){
 
     hero.removeClass("active");
 
-    vilain.toggleClass('active');
+    vilain.addClass('active');
 }
 
 
