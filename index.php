@@ -304,10 +304,8 @@ if(arraysEqual(WinHand,comboHero)){
     var vilain = $('#vilain');
 
     vilain.removeClass("active");
+    hero.toggleClass('active');
 
-    window.setInterval(function() {  
-        hero.toggleClass('active');
-    }, 1000);
 
 }
 else if(arraysEqual(WinHand,comboVilain)){
@@ -318,9 +316,7 @@ else if(arraysEqual(WinHand,comboVilain)){
 
     hero.removeClass("active");
 
-    window.setInterval(function() {  
-        vilain.toggleClass('active');
-    }, 1000);
+    vilain.toggleClass('active');
 }
 
 
