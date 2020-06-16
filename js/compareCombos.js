@@ -84,7 +84,7 @@ function getHandValue(cards) {
 		}
 	}
 	if (isAThree && isATwo) {
-		return 4 * getTotalValue(cards) * (2000/100);
+		return 5 * getTotalValue(cards) * (2000/100);
 	}
 
 	// Check for a flush
@@ -98,11 +98,25 @@ function getHandValue(cards) {
 				}
 			}
 		)
-		return 3 * getTotalValue(cards)* (1000/100);
+		return 4 * getTotalValue(cards)* (1000/100);
+	}
+
+	// Check for a brelan
+	if (isABrelan(cards)) {
+		let values = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
+		values.forEach(
+			value => {
+				let nbOcc = nbOccurences(cardsValue, value)
+				if (nbOcc == 3) {
+					return
+				}
+			}
+		)
+		return 3 * getTotalValue(cards)* (500/100);
 	}
 
 	// Check for a pair
-	if (isAPair(cards)) {
+	else if (isAPair(cards)) {
 		let values = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
 		values.forEach(
 			value => {

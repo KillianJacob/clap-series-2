@@ -13,6 +13,7 @@
 <script src="js/orderCards.js"></script>
 <script src="js/isAFlush.js"></script>
 <script src="js/isAPair.js"></script>
+<script src="js/isABrelan.js"></script>
 <script src="js/Utils.js"></script>
 <script src="js/compareCombos.js"></script>
 

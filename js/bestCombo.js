@@ -64,6 +64,39 @@ function bestCombo(cards) {
 		return ['Flush',hand]
 	}
 
+	if (isABrelan(cards)) {
+		let hand = []
+		let values = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
+
+
+		for (let i = 0; i < values.length; i++) {
+
+			var value = values[i];
+
+			let nbOcc = nbOccurences(cardsValue, value)
+			if (nbOcc == 3) {
+				let indexes = allIndexOf(cardsValue, value)
+				for (let i = 0; i < 3; i++) {
+					hand.push(cards[indexes[i]])
+				}
+				let i = 0
+				let j = 0
+				while (j < 2) {
+					if (!indexes.includes(i)) {
+						hand.push(cards[i])
+						j++
+					}
+					i++
+				}
+
+				break;
+			}			
+
+		}
+
+		return ['Brelan',hand]
+	}
+
 	// Check for a pair
 	if (isAPair(cards)) {
 		let hand = []
