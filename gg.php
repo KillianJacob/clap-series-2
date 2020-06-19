@@ -84,10 +84,9 @@ $('#submitForm').click( function() {
         data: $('#formEmail').serialize(),
         success: function(data) {
                     console.log(data);
+                    $('#email').modal('show');
                  }
     });
-
-    $('#email').modal('show');
 
 });
 
