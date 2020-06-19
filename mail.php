@@ -8,6 +8,9 @@ use PHPMailer\PHPMailer\Exception;
 
 $method =  $_SERVER['REQUEST_METHOD'];
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 if($method == "POST" && isset($_POST["email"])){
 
     $email = $_POST["email"];
@@ -17,8 +20,8 @@ if($method == "POST" && isset($_POST["email"])){
 
     );
 
-    //send mail
     sendmail($email);
+
 
     echo json_encode($result);
 
@@ -44,8 +47,8 @@ function sendmail($to){
         $mail->Host       = 'mail.gmx.com';                    // Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
         $mail->Username   = 'clap_serie@gmx.fr';                     // SMTP username
-        $mail->Password   = 'azeqsd123'; 
-        $mail->CharSet = 'UTF-8';                              // SMTP password
+        $mail->Password   = $_ENV['EMAIL_PASSWORD'];
+        $mail->CharSet = 'UTF-8';                          // SMTP password
         //$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; 
         $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
