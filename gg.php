@@ -3,6 +3,7 @@
 <head>
 
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
 
 </head>
@@ -33,9 +34,15 @@
 
         <div class="col-6 offset-3">
             
-            <input type="text" class="form-control mb-3" id="" placeholder="Email">
+            <form id="formEmail" method="post">
+
+            <input type="text" name="email" class="form-control mb-3" id="" placeholder="Email">
             
             Entrez votre email pour decouvrir votre cadeau
+
+            </form>
+
+            <button type="button" id="submitForm" class="btn btn-secondary">Jouer !</button>
 
         </div>
 
@@ -45,5 +52,27 @@
 </div>
 
 </body>
+
+<script>
+
+$(document).ready(function() {
+
+$('#submitForm').click( function() {
+
+    $.ajax({
+        url: 'http://localhost:8000/mail.php',
+        type: 'post',
+        dataType: 'json',
+        data: $('#formEmail').serialize(),
+        success: function(data) {
+                    console.log(data);
+                 }
+    });
+
+});
+
+});
+
+</script>
 
 </html>
